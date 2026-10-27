@@ -108,6 +108,10 @@ main{max-width:1180px;margin:0 auto;padding:16px 16px 96px}
 .sk .ska{width:110px}.sk small{color:var(--ink-2);font-size:12px}.sk.on{border-color:var(--pc);background:color-mix(in oklab,var(--pc) 12%,var(--surface));box-shadow:0 0 0 3px color-mix(in oklab,var(--pc) 22%,transparent)}.sk:disabled{cursor:default;opacity:.75}
 .dprev b{font-size:18px}
 
+.hubback{flex:none;text-decoration:none;font-weight:800;font-size:14px;color:var(--brand);background:#fff;border-radius:12px;padding:7px 11px;box-shadow:0 2px 6px rgba(0,0,0,.15);white-space:nowrap;margin-right:4px}
+@media (max-width:520px){.hubback{padding:6px 9px;font-size:13px}}
+.top .brand{margin-right:auto}
+
 </style></head><body><div id="app"></div>
 <script src="https://cych05845-jpg.github.io/ed-account/account-sdk.js"></script>
 <script src="config.js"></script>
@@ -332,7 +336,7 @@ const roomOf = S => ROOMS.find(r => r.id === (S.P.room || "home") && r.need(S)) 
 const TABS = [["home", "🏠", "小屋"], ["task", "📋", "任務"], ["dress", "👕", "換裝"], ["dex", "📖", "圖鑑"], ["rec", "📊", "紀錄"]];
 function shell(){
   const u = ME();
-  $("app").innerHTML = `<header class="top"><a class="brand" href="#home"><span class="logo">🐾</span><span><b>急診學習站寵物</b><small>陪你一起成長的急診夥伴</small></span></a><div class="topr" id="topr"></div></header>
+  $("app").innerHTML = `<header class="top"><a class="hubback" href="${HUB}" aria-label="回學習站">‹ 學習站</a><a class="brand" href="#home"><span class="logo">🐾</span><span><b>急診學習站寵物</b><small>陪你一起成長的急診夥伴</small></span></a><div class="topr" id="topr"></div></header>
     <nav class="tabs" id="tabs">${TABS.map(t => `<a href="#${t[0]}" data-t="${t[0]}"><i>${t[1]}</i><span>${t[2]}</span></a>`).join("")}</nav>
     <main id="main"><p class="hint">讀取中…</p></main><div class="toast" id="toast"></div>`;
 }
