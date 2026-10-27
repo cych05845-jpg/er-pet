@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>急診學習站寵物</title><meta name="theme-color" content="#24407E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐾%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{--bg:#FFF7EE;--surface:#fff;--surface-2:#FFF1E2;--ink:#2B2118;--ink-2:#7A6A5C;--line:#F0DDC8;--brand:#24407E;--pc:#3B5BA9;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130F;--surface:#221C16;--surface-2:#2C241C;--ink:#F5EDE4;--ink-2:#BCAE9F;--line:#3D3228;--brand:#8FB0F5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17130F;--surface:#221C16;--surface-2:#2C241C;--ink:#F5EDE4;--ink-2:#BCAE9F;--line:#3D3228;--brand:#8FB0F5;color-scheme:dark}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;line-height:1.55}
+a{color:var(--brand)}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;background:linear-gradient(120deg,#24407E,#3B66B8);color:#fff;box-shadow:0 8px 20px -14px rgba(0,0,0,.6)}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;min-width:0}.brand b{display:block;font-size:18px;font-weight:900;white-space:nowrap}.brand small{display:block;font-size:12px;opacity:.85;white-space:nowrap}
+.logo{width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center;font-size:24px;flex:none}
+.topr{display:flex;align-items:center;gap:10px}.who{display:grid;justify-items:end;gap:2px}.who b{font-size:14px}
+.xpm{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800}.xpm .bar{width:90px;height:7px;margin:0;background:rgba(255,255,255,.3)}.xpm .bar i{background:#FFD45C}
+.tteam{font-size:13px;font-weight:800;background:rgba(255,255,255,.18);border-radius:999px;padding:3px 10px;white-space:nowrap}
+@media (max-width:520px){.brand small,.tteam{display:none}}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+.tabs a{display:grid;justify-items:center;gap:0;text-decoration:none;color:var(--ink-2);font-size:12px;font-weight:700;padding:6px 2px;border-radius:12px}.tabs a i{font-style:normal;font-size:22px}.tabs a.on{color:var(--brand);background:var(--surface-2)}
+.tabs[hidden]{display:none}
+main{max-width:1180px;margin:0 auto;padding:16px 16px 96px}
+@media (min-width:1000px){.tabs{top:62px;bottom:0;right:auto;width:180px;grid-template-columns:1fr;align-content:start;gap:4px;border-top:0;border-right:1px solid var(--line);padding:16px 10px}
+  .tabs a{grid-template-columns:32px 1fr;justify-items:start;align-items:center;font-size:16px;padding:10px 12px}main{margin-left:180px;padding:22px 28px 40px;max-width:1240px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px 18px;margin-bottom:16px;box-shadow:0 10px 26px -22px rgba(80,40,0,.5)}
+.card h3{margin:0 0 12px;font-size:18px}.card h3 small{font-weight:500;color:var(--ink-2);font-size:13px;margin-left:6px}
+.hero{background:linear-gradient(135deg,#FFE3C4,#FFF1E2);border-radius:24px;padding:20px 22px;margin-bottom:16px}.hero h1{margin:0 0 6px;font-size:24px}.hero p{margin:0;color:var(--ink-2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero{background:linear-gradient(135deg,#3A2A1A,#2C241C)}}
+.hint{color:var(--ink-2);font-size:13px;margin:6px 0}.hint.warn{color:#C2410C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:800;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--brand);color:#fff;cursor:pointer;text-decoration:none}
+.btn.big{font-size:17px;padding:13px 24px}.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.mini{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
+.fld{display:grid;gap:6px;font-weight:700;font-size:14px;margin:10px 0}.fld input{font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.bar{height:9px;border-radius:99px;background:color-mix(in oklab,var(--pc) 15%,var(--surface-2));overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pc),color-mix(in oklab,var(--pc) 55%,#fff))}.bar.big{height:13px}
+.petsvg,.petimg{width:100%;height:auto;display:block}
+.lock{filter:brightness(0) opacity(.16)}
+/* 領養 */
+.adopt{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.ac{display:grid;gap:4px;justify-items:center;text-align:center;font:inherit;color:var(--ink);background:var(--surface);border:2px solid color-mix(in oklab,var(--pc) 30%,var(--line));border-radius:22px;padding:12px;cursor:pointer}
+.ac .aca{width:132px}.ac b{font-size:17px}.ac span{font-size:13px;font-weight:800;color:var(--pc)}.ac small{font-size:12px;color:var(--ink-2)}
+.ac.on{border-color:var(--pc);box-shadow:0 0 0 4px color-mix(in oklab,var(--pc) 25%,transparent)}.adopt.preview .ac{cursor:default}
+.login{display:grid;gap:8px;justify-items:start}
+/* 小屋 */
+.homeg{display:grid;gap:16px;margin-bottom:16px}@media (min-width:900px){.homeg{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start}}
+.room{position:relative;border-radius:26px;overflow:hidden;min-height:380px;display:grid;align-content:end;justify-items:center;padding:16px;border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(80,40,0,.6)}
+.roombg{position:absolute;inset:0;width:100%;height:100%}
+.petw{position:relative;width:min(300px,72%);cursor:pointer;-webkit-tap-highlight-color:transparent;z-index:1}.petw.big{width:min(320px,100%);margin:0 auto}
+.petw>svg,.petw>img,.petw .pimgw{filter:drop-shadow(0 12px 16px rgba(0,0,0,.18))}
+@media (prefers-reduced-motion:no-preference){.petw>svg{animation:breath 3.6s ease-in-out infinite}}
+@keyframes breath{50%{transform:scale(1.015,.99)}}
+.petw.bounce>*{animation:bounce .7s ease}.petw.jump>*{animation:jump .8s ease}.petw.spin>*{animation:wig .9s ease}.petw.shake>*{animation:wig .5s ease}.petw.sleep>*{animation:none;filter:brightness(.82) drop-shadow(0 12px 16px rgba(0,0,0,.18))}
+@keyframes bounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-18px) scale(1.03)}60%{transform:translateY(0) scale(.98)}}
+@keyframes jump{0%,100%{transform:translateY(0)}20%{transform:translateY(-30px)}40%{transform:translateY(0)}60%{transform:translateY(-16px)}}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.petw.sleep::after{content:"z Z z";position:absolute;top:4%;right:4%;font-weight:900;color:#7a8a9a;font-size:22px;animation:fx 2s ease-out}
+.fx{position:absolute;bottom:45%;font-style:normal;color:#E5484D;font-size:24px;animation:fx 1.5s ease-out forwards;pointer-events:none}@keyframes fx{to{transform:translateY(-130px);opacity:0}}
+.bub{position:relative;z-index:2;justify-self:center;background:var(--surface);border:2px solid var(--pc);border-radius:18px;padding:8px 16px;font-weight:800;margin-bottom:6px;max-width:90%;text-align:center;box-shadow:0 8px 18px -12px rgba(0,0,0,.5)}
+.bub::after{content:"";position:absolute;left:50%;bottom:-10px;border:9px solid transparent;border-top-color:var(--pc);border-bottom:0;transform:translateX(-50%)}
+.bub.pop{animation:pop .25s ease}@keyframes pop{0%{transform:scale(.85)}100%{transform:scale(1)}}
+.acts{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.acts button{display:grid;justify-items:center;font:inherit;font-size:12px;font-weight:800;color:var(--ink);background:color-mix(in oklab,var(--surface) 88%,transparent);backdrop-filter:blur(6px);border:1.5px solid var(--line);border-radius:16px;padding:6px 12px;cursor:pointer;min-width:58px}.acts i{font-style:normal;font-size:22px}
+.info .ih{display:flex;align-items:center;gap:10px}.info h2{margin:0;font-size:26px}
+.itag{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:6px 0}.itag b{font-size:17px}.itag small{color:var(--ink-2)}
+.lvp{font-size:12.5px;font-weight:800;color:#fff;background:var(--pc);border-radius:999px;padding:2px 10px}
+.aff{display:flex;align-items:center;gap:4px;margin:8px 0}.aff i{font-style:normal;font-size:20px;color:var(--line)}.aff i.on{color:#E5484D}.aff small{margin-left:6px;color:var(--ink-2)}
+.feed{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+.feed button{display:grid;justify-items:center;gap:1px;font:inherit;color:var(--ink);background:var(--surface-2);border:1.5px solid var(--line);border-radius:16px;padding:8px 4px;cursor:pointer}.feed i{font-style:normal;font-size:26px}.feed b{font-size:14px}.feed small{font-size:11px;color:var(--ink-2)}
+.feed button:disabled{opacity:.45;cursor:default}.feed button:not(:disabled):hover{border-color:var(--pc)}
+.gate{display:grid;gap:4px;margin-top:12px;padding:12px 14px;border-radius:16px;background:var(--surface-2);font-size:14px}.gate span{color:var(--ink-2)}.gate span.y{color:#1B7D63;font-weight:700}.gate.ok{background:color-mix(in oklab,#E8A317 16%,var(--surface))}.gate .btn{justify-self:start;margin-top:6px}
+.evo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}@media (max-width:640px){.evo{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ev{display:grid;gap:4px;justify-items:center;text-align:center;border:1.5px solid var(--line);border-radius:18px;padding:10px;background:var(--surface)}.ev.now{border-color:var(--pc);box-shadow:0 0 0 3px color-mix(in oklab,var(--pc) 22%,transparent)}
+.ev .lvb{font-size:12px;font-weight:800;color:#fff;background:var(--pc);border-radius:999px;padding:2px 10px}.ev:not(.on) .lvb{background:var(--ink-2)}.ev small{font-size:12.5px}.ev em{font-style:normal;font-size:11px;color:var(--ink-2)}
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.rm{display:grid;gap:4px;font:inherit;color:var(--ink);text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:8px;cursor:pointer}.rm svg{width:100%;border-radius:10px;display:block}.rm small{color:var(--ink-2);font-size:12px}.rm.on{border-color:var(--pc)}.rm:disabled{opacity:.6;cursor:default}
+/* 任務 */
+.haves{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.haves div{display:grid;justify-items:center;background:var(--surface-2);border-radius:16px;padding:8px}.haves i{font-style:normal;font-size:26px}.haves b{font-size:22px}.haves small{color:var(--ink-2)}
+.tasks{display:grid;gap:8px}
+.tk{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--surface-2);border-radius:16px;padding:10px 14px}.tk>i{font-style:normal;font-size:26px}.tk b{display:block}.tk small{color:var(--ink-2);font-size:12.5px}.tk em{font-style:normal;font-weight:800;color:var(--brand);font-size:13px;white-space:nowrap}.tk.done em{color:#1B7D63}
+/* 換裝 */
+.dressg{display:grid;gap:16px}@media (min-width:900px){.dressg{grid-template-columns:minmax(260px,360px) minmax(0,1fr);align-items:start}}
+.dprev{display:grid;gap:10px;justify-items:center;background:linear-gradient(160deg,color-mix(in oklab,var(--pc) 14%,var(--surface)),var(--surface))}
+.slot{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:start;padding:8px 0;border-bottom:1px dashed var(--line)}.slot>b{padding-top:6px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}.op{display:grid;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink);background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;text-align:left}.op small{font-size:11px;color:var(--ink-2);font-weight:500}.op.on{border-color:var(--pc);background:color-mix(in oklab,var(--pc) 14%,var(--surface))}.op:disabled{opacity:.5;cursor:default}
+.pimgw{position:relative}.obadges{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px}.obadges span{font-size:11px;font-weight:700;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+/* 圖鑑 */
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:10px}
+.dc{display:grid;gap:3px;justify-items:center;text-align:center;border-radius:18px;padding:10px;background:color-mix(in oklab,var(--pc) 9%,var(--surface));border:1.5px solid color-mix(in oklab,var(--pc) 25%,var(--line))}.dc.lockc{background:var(--surface-2);border-color:var(--line)}
+.dca{width:118px}.dc small{color:var(--ink-2);font-size:12px}.dc p{margin:4px 0 0;font-size:12.5px;line-height:1.5;text-align:left}
+.ach{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.ach div{display:grid;justify-items:center;text-align:center;gap:2px;border-radius:16px;padding:10px;background:var(--surface-2);opacity:.45;filter:grayscale(1)}.ach div.on{opacity:1;filter:none;background:color-mix(in oklab,#E8A317 14%,var(--surface))}.ach i{font-style:normal;font-size:28px}.ach small{color:var(--ink-2);font-size:12px}
+/* 紀錄 */
+.kpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.kpi div{display:grid;justify-items:center;background:var(--surface-2);border-radius:16px;padding:10px}.kpi i{font-style:normal;font-size:24px}.kpi b{font-size:22px}.kpi small{color:var(--ink-2)}
+.wk{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;align-items:end;height:160px;padding-top:10px}.wk div{display:grid;grid-template-rows:1fr auto auto;height:100%;align-items:end;justify-items:center}.wk span{width:70%;min-height:3px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,var(--pc),color-mix(in oklab,var(--pc) 50%,#fff))}.wk small{font-size:10px;color:var(--ink-2)}.wk b{font-size:11px}
+.sl{list-style:none;margin:0;padding:0;display:grid;gap:6px}.sl li{display:flex;flex-wrap:wrap;gap:4px 10px;background:var(--surface-2);border-radius:12px;padding:8px 12px}.sl time{font-family:monospace;color:var(--ink-2)}.sl span{color:var(--ink-2)}
+/* 進化 */
+.evov{position:fixed;inset:0;z-index:90;background:rgba(10,16,22,.72);display:grid;place-items:center;padding:16px}
+.evbox{background:var(--surface);border-radius:26px;padding:22px;max-width:420px;width:100%;display:grid;gap:8px;justify-items:center;text-align:center}
+.evart{position:relative;width:240px;height:252px}.evart>div{position:absolute;inset:0}
+.evf{animation:evout 1.6s ease forwards}.evt{opacity:0;animation:evin 1.6s ease .9s forwards}
+@keyframes evout{0%{opacity:1}60%{opacity:1;filter:brightness(3) blur(1px)}100%{opacity:0;transform:scale(.8)}}
+@keyframes evin{0%{opacity:0;transform:scale(.6);filter:brightness(3)}100%{opacity:1;transform:scale(1);filter:none}}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:10px 18px;border-radius:14px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:95}.toast.show{opacity:1;transform:translateX(-50%)}.toast.bad{background:#B42318}
+.conf{position:fixed;inset:0;pointer-events:none;z-index:99;overflow:hidden}.conf i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:conf 2.2s ease-in forwards}@keyframes conf{to{top:105%;transform:rotate(720deg)}}
+.foot{color:var(--ink-2);font-size:12px;text-align:center;margin-top:20px}
+.skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sk{display:grid;gap:3px;justify-items:center;text-align:center;font:inherit;color:var(--ink);background:var(--surface-2);border:2px solid var(--line);border-radius:18px;padding:10px;cursor:pointer}
+.sk .ska{width:110px}.sk small{color:var(--ink-2);font-size:12px}.sk.on{border-color:var(--pc);background:color-mix(in oklab,var(--pc) 12%,var(--surface));box-shadow:0 0 0 3px color-mix(in oklab,var(--pc) 22%,transparent)}.sk:disabled{cursor:default;opacity:.75}
+.dprev b{font-size:18px}
+
+</style></head><body><div id="app"></div>
+<script src="https://cych05845-jpg.github.io/ed-account/account-sdk.js"></script>
+<script src="config.js"></script>
+<script>
+/* 嘉基急診 急診學習站寵物 er-pet：學習站闖關、每日目標、團隊擬真 → 養成寵物 */
+/* ---------- 3D 立體感：把平面色塊換成球面漸層（左上亮、右下暗）＋柔和外框＋高光＋落影 ---------- */
+const SH3 = { n: 0 };
+function hexMix(h, t, k){ const p = x => parseInt(x, 16), a = [p(h.slice(1, 3)), p(h.slice(3, 5)), p(h.slice(5, 7))], b = t === "w" ? [255, 255, 255] : [20, 12, 8];
+  return "#" + a.map((v, i) => Math.round(v + (b[i] - v) * k).toString(16).padStart(2, "0")).join(""); }
+function to3D(svg){
+  const id = "s" + (++SH3.n), defs = {}, big = /^#[0-9a-fA-F]{6}$/;
+  let out = svg.replace(/fill="(#[0-9a-fA-F]{6})"/g, (m, c) => { const k = c.toLowerCase(); if (k === "#000000" || k === "#111111" || k === "#ffffff") return m;
+    const g = `${id}${k.slice(1)}`; defs[g] = `<radialGradient id="${g}" cx="38%" cy="30%" r="78%"><stop offset="0" stop-color="${hexMix(k, "w", .42)}"/><stop offset=".5" stop-color="${k}"/><stop offset="1" stop-color="${hexMix(k, "b", .38)}"/></radialGradient>`; return `fill="url(#${g})"`; });
+  out = out.replace(/stroke="#3a2a20" stroke-width="3"/g, 'stroke="#3a2a20" stroke-opacity=".28" stroke-width="2"').replace(/stroke="#3a2a20" stroke-width="2(\.5)?"/g, 'stroke="#3a2a20" stroke-opacity=".3" stroke-width="1.6"');
+  /* 眼睛的大高光 */
+  out = out.replace(/<circle cx="([\d.]+)" cy="([\d.]+)" r="(2\.[0-9]+|2)" fill="#fff"\/>/g, (m, x, y) => `<circle cx="${x}" cy="${y}" r="3.6" fill="#fff"/><circle cx="${+x - 4}" cy="${+y + 5}" r="1.4" fill="#fff" opacity=".8"/>`);
+  const extra = `<filter id="${id}f" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#3a2a20" flood-opacity=".22"/></filter>
+    <radialGradient id="${id}h" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".65"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`;
+  out = out.replace(/(<svg[^>]*>)/, `$1<defs>${Object.values(defs).join("")}${extra}</defs>`);
+  /* 整隻加落影；頭頂左上加一塊柔光 */
+  out = out.replace(/<g transform="translate\(100 (\d+)\) scale\(([\d.]+)\) translate\(-100 -(\d+)\)">/, (m) => m.replace("<g ", `<g filter="url(#${id}f)" `));
+  out = out.replace(/<\/svg>$/, `<ellipse cx="80" cy="58" rx="24" ry="14" fill="url(#${id}h)" opacity=".55" transform="rotate(-20 80 58)"/></svg>`);
+  return out;
+}
+
+const PET_IMG = {};   // 例：bear: ["pets/bear-1.webp", "pets/bear-2.webp", "pets/bear-3.webp", "pets/bear-4.webp"]
+const PET_SP = {
+  bear: { n: "台灣黑熊", tag: "勇敢可靠、守護急診", trait: "穩重、溫暖、有責任感", c: "#3B5BA9", st: ["愛睡覺的圓滾滾小熊", "開始探索，充滿好奇", "學習照護技能", "急診守護者・帶領團隊"], lore: "台灣特有亞種。胸前的 V 字白毛每一隻都不一樣，是台灣最大的陸生哺乳動物。" },
+  cat: { n: "台灣石虎", tag: "敏捷靈活、細心觀察", trait: "機警、聰明、觀察力強", c: "#C9822B", st: ["天真好奇的小石虎", "開始探索，動作敏捷", "深化技能，細心協作", "創傷守護者・迅速反應"], lore: "台灣僅存的原生野生貓科動物。耳朵背面有白斑、額頭有兩條白線，住在淺山地區。" },
+  fox: { n: "小狐狸", tag: "智慧引導、整合全局", trait: "聰慧、溫柔、充滿靈性", c: "#E06A2B", st: ["軟萌的小狐狸", "學習探索，逐漸自信", "技能提升，幫助夥伴", "九尾靈狐・智囊 Leader"], lore: "傳說角色：修練越久尾巴越多，九條尾巴代表智慧圓滿，最擅長整合全局。", last: "傳說進化" },
+  dragon: { n: "小龍", tag: "熱情行動、突破挑戰", trait: "積極、勇敢、永不放棄", c: "#1E9C8C", st: ["活潑好動的小龍", "開始學習，充滿活力", "技能進階，勇於挑戰", "急救先鋒・突破困難"], lore: "傳說角色：遇到困難就往前衝，最喜歡第一個衝進急救室。" },
+  pangolin: { n: "穿山甲", tag: "堅韌溫柔、守護安全", trait: "溫和、細心、善於保護", c: "#A8703E", st: ["害羞可愛的小穿山甲", "開始探索，逐漸適應", "精進技能，支援團隊", "安全守護者・守護團隊"], lore: "台灣特有亞種。全身鱗片，遇到危險會捲成球；主食白蟻和螞蟻，是保育類動物。" },
+  calico: { n: "貓咪", tag: "溫柔陪伴、療癒能量", trait: "貼心、親切、善於連結", c: "#9C5BC9", st: ["愛撒嬌的小貓咪", "開始學習，樂於互動", "技能進階，關懷夥伴", "療癒支援者・連結彼此"], lore: "三花貓幾乎都是母貓，因為決定橘色與黑色毛的基因在 X 染色體上。" }
+};
+const PET_ORDER = ["bear", "cat", "fox", "dragon", "pangolin", "calico"];
+const PET_STAGE = ["幼年期", "成長期", "進階期", "Leader 期"];
+/* 進化條件：經驗值＋闖完指定的區 */
+const PET_GATE = [null, { xp: 200, any: ["c", "o"], txt: "闖完治療區或留觀區闖關地圖" }, { xp: 600, all: ["p", "r"], txt: "闖完兒科與急救區闖關地圖" }, { xp: 1200, all: ["t", "l"], txt: "闖完檢傷與 Leader 闖關地圖" }];
+const PET_XP = { food: 20, water: 10, snack: 30 };
+const ZONE_NAME = { c: "治療區", o: "留觀區", p: "兒科", r: "急救區", t: "檢傷", l: "Leader", s: "特殊教學" };
+
+/* ---------- 原創占位圖（SVG） ---------- */
+const POL = "#3a2a20", pS = 'stroke="#3a2a20" stroke-width="3"';
+const pEyes = (y, sleep, dx = 20) => sleep ? `<path d="M${100 - dx - 8} ${y} q8 6 16 0 M${100 + dx - 8} ${y} q8 6 16 0" fill="none" stroke="#111" stroke-width="3.2" stroke-linecap="round"/>`
+  : `<circle cx="${100 - dx}" cy="${y}" r="8" fill="#111"/><circle cx="${100 + dx}" cy="${y}" r="8" fill="#111"/><circle cx="${103 - dx}" cy="${y - 3}" r="2.8" fill="#fff"/><circle cx="${103 + dx}" cy="${y - 3}" r="2.8" fill="#fff"/>`;
+const pBlush = y => `<ellipse cx="66" cy="${y}" rx="8" ry="5" fill="#FF8FA3" opacity=".55"/><ellipse cx="134" cy="${y}" rx="8" ry="5" fill="#FF8FA3" opacity=".55"/>`;
+const pLimbs = (col, belly) => `<ellipse cx="78" cy="182" rx="15" ry="9" fill="${col}" ${pS}/><ellipse cx="122" cy="182" rx="15" ry="9" fill="${col}" ${pS}/>
+  <ellipse cx="100" cy="150" rx="44" ry="37" fill="${col}" ${pS}/>${belly ? `<ellipse cx="100" cy="157" rx="25" ry="23" fill="${belly}"/>` : ""}
+  <ellipse cx="57" cy="150" rx="11" ry="17" transform="rotate(20 57 150)" fill="${col}" ${pS}/><ellipse cx="143" cy="150" rx="11" ry="17" transform="rotate(-20 143 150)" fill="${col}" ${pS}/>`;
+const PET_DRAW = {
+  bear: o => `${pLimbs("#26262c")}<path d="M70 132 Q100 168 130 132 Q118 140 100 150 Q82 140 70 132Z" fill="#F4ECD8"/>
+    <circle cx="60" cy="48" r="17" fill="#26262c" ${pS}/><circle cx="140" cy="48" r="17" fill="#26262c" ${pS}/><circle cx="60" cy="48" r="8" fill="#5b4a48"/><circle cx="140" cy="48" r="8" fill="#5b4a48"/>
+    <circle cx="100" cy="86" r="50" fill="#26262c" ${pS}/><ellipse cx="100" cy="106" rx="23" ry="17" fill="#D9B48A"/>
+    ${o.sleep ? `<path d="M70 84 q8 6 16 0 M114 84 q8 6 16 0" fill="none" stroke="#e8ddd2" stroke-width="3.2" stroke-linecap="round"/>` : `<circle cx="78" cy="83" r="9.5" fill="#fff"/><circle cx="122" cy="83" r="9.5" fill="#fff"/><circle cx="79" cy="84" r="6.5" fill="#111"/><circle cx="121" cy="84" r="6.5" fill="#111"/><circle cx="81" cy="82" r="2.3" fill="#fff"/><circle cx="123" cy="82" r="2.3" fill="#fff"/>`}
+    <ellipse cx="100" cy="99" rx="8" ry="5.5" fill="#1a1a1a"/><path d="M100 104 v6 M92 112 q8 6 16 0" fill="none" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round"/>${pBlush(104)}`,
+  cat: o => `<path d="M140 172 Q186 176 178 136" fill="none" stroke="${POL}" stroke-width="14" stroke-linecap="round"/><path d="M140 172 Q186 176 178 136" fill="none" stroke="#D9A55B" stroke-width="9" stroke-linecap="round"/>${[0, 1, 2].map(i => `<circle cx="${160 + i * 7}" cy="${170 - i * 12}" r="3.5" fill="#3a2a20"/>`).join("")}
+    ${pLimbs("#D9A55B", "#F6E7CC")}${[[80, 140], [120, 138], [92, 166], [112, 168], [70, 160], [130, 160]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4" fill="#5a3b20"/>`).join("")}
+    <path d="M52 64 L62 18 L92 44Z" fill="#D9A55B" ${pS} stroke-linejoin="round"/><path d="M148 64 L138 18 L108 44Z" fill="#D9A55B" ${pS} stroke-linejoin="round"/><path d="M62 26 l4 -8 4 10z M138 26 l-4 -8 -4 10z" fill="#3a2a20"/>
+    <circle cx="100" cy="86" r="48" fill="#D9A55B" ${pS}/><path d="M92 40 Q90 60 94 74 M108 40 Q110 60 106 74" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none"/>
+    ${[[68, 70], [132, 70], [62, 92], [138, 92]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4" fill="#5a3b20"/>`).join("")}<ellipse cx="100" cy="108" rx="24" ry="16" fill="#F6E7CC"/>
+    ${pEyes(86, o.sleep)}<path d="M95 100 h10 l-5 6z" fill="#E58C8C"/><path d="M100 106 v4 M92 112 q4 4 8 0 q4 4 8 0" fill="none" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/>${pBlush(104)}`,
+  fox: o => { const n = o.tails || 1; return `${[...Array(n)].map((_, i) => { const a = n === 1 ? 0 : -60 + i * (120 / (n - 1)); return `<g transform="rotate(${a} 100 160)"><path d="M108 168 Q150 150 152 108 Q172 142 150 172 Q132 186 108 176Z" fill="${n > 3 ? "#FFE3D2" : "#F08A3C"}" ${pS}/><path d="M152 108 Q164 128 160 146 L148 132Z" fill="#fff"/></g>`; }).join("")}
+    ${pLimbs(n > 3 ? "#FFF3EA" : "#F08A3C", "#FFF6EE")}
+    <path d="M50 70 L60 18 L94 46Z" fill="${n > 3 ? "#FFF3EA" : "#F08A3C"}" ${pS} stroke-linejoin="round"/><path d="M150 70 L140 18 L106 46Z" fill="${n > 3 ? "#FFF3EA" : "#F08A3C"}" ${pS} stroke-linejoin="round"/><path d="M60 30 L66 48 L80 46Z M140 30 L134 48 L120 46Z" fill="#FFD3BE"/>
+    <circle cx="100" cy="88" r="48" fill="${n > 3 ? "#FFF3EA" : "#F08A3C"}" ${pS}/><path d="M56 96 Q78 92 100 118 Q122 92 144 96 Q132 132 100 134 Q68 132 56 96Z" fill="#FFF6EE"/>
+    ${n > 3 ? `<path d="M92 52 q8 -10 16 0 q-8 6 -16 0z" fill="#E5484D"/>` : ""}${pEyes(88, o.sleep)}<ellipse cx="100" cy="106" rx="6" ry="4.5" fill="#2a1a12"/><path d="M93 114 q7 5 14 0" fill="none" stroke="#2a1a12" stroke-width="2.4" stroke-linecap="round"/>${pBlush(106)}`; },
+  dragon: o => `<path d="M136 168 Q182 176 186 140 L172 150 Z" fill="#3BB8A8" ${pS} stroke-linejoin="round"/>
+    ${o.wing ? `<path d="M56 128 Q14 96 22 70 Q40 92 58 96Z M144 128 Q186 96 178 70 Q160 92 142 96Z" fill="#7FD6C8" ${pS} stroke-linejoin="round"/>` : `<path d="M60 128 Q36 116 38 100 Q50 110 62 112Z M140 128 Q164 116 162 100 Q150 110 138 112Z" fill="#7FD6C8" ${pS}/>`}
+    ${pLimbs("#3BB8A8", "#F6E9B8")}<path d="M84 140 h32 M82 152 h36 M84 164 h32" stroke="#E4CF86" stroke-width="3"/>
+    <path d="M70 46 L62 16 L84 38Z M130 46 L138 16 L116 38Z" fill="#F2C230" ${pS} stroke-linejoin="round"/>
+    <circle cx="100" cy="86" r="48" fill="#3BB8A8" ${pS}/><path d="M90 40 l10 -12 10 12" fill="#2A9A8C" ${pS} stroke-linejoin="round"/>
+    <ellipse cx="100" cy="108" rx="26" ry="16" fill="#8EE0D3"/>${pEyes(84, o.sleep)}<circle cx="93" cy="104" r="2.6" fill="#1f5f57"/><circle cx="107" cy="104" r="2.6" fill="#1f5f57"/><path d="M90 114 q10 8 20 0" fill="#fff" stroke="${POL}" stroke-width="2.4"/>${pBlush(102)}`,
+  pangolin: o => `<path d="M142 168 Q186 168 176 132 Q172 118 160 122" fill="none" stroke="${POL}" stroke-width="22" stroke-linecap="round"/><path d="M142 168 Q186 168 176 132 Q172 118 160 122" fill="none" stroke="#A8703E" stroke-width="16" stroke-linecap="round"/>
+    <ellipse cx="78" cy="184" rx="14" ry="8" fill="#C9A27C" ${pS}/><ellipse cx="122" cy="184" rx="14" ry="8" fill="#C9A27C" ${pS}/><ellipse cx="100" cy="122" rx="62" ry="64" fill="#A8703E" ${pS}/>
+    ${[[70, 8], [92, 7], [114, 7], [136, 6], [158, 5]].map(([y, n]) => Array.from({ length: n }, (_, i) => { const x = 100 + (i - (n - 1) / 2) * 17; return `<path d="M${x - 9} ${y} q9 12 18 0" fill="#C08A50" stroke="${POL}" stroke-width="2"/>`; }).join("")).join("")}
+    <path d="M70 118 Q100 96 130 118 Q132 160 100 168 Q68 160 70 118Z" fill="#E7CBA9" ${pS}/>${pEyes(128, o.sleep, 14)}<ellipse cx="100" cy="148" rx="7" ry="5" fill="#5a3b2a"/><path d="M93 156 q7 5 14 0" fill="none" stroke="#5a3b2a" stroke-width="2.5" stroke-linecap="round"/>${pBlush(142)}`,
+  calico: o => `<path d="M140 172 Q184 172 174 132" fill="none" stroke="${POL}" stroke-width="14" stroke-linecap="round"/><path d="M140 172 Q184 172 174 132" fill="none" stroke="#2b2b30" stroke-width="9" stroke-linecap="round"/>
+    ${pLimbs("#FFFBF4")}<path d="M60 136 Q70 124 84 132 Q80 150 64 152Z" fill="#F0A04B"/><path d="M118 160 Q132 150 142 160 Q136 176 120 174Z" fill="#2b2b30"/>
+    <path d="M52 64 L60 20 L92 44Z" fill="#F0A04B" ${pS} stroke-linejoin="round"/><path d="M148 64 L140 20 L108 44Z" fill="#2b2b30" ${pS} stroke-linejoin="round"/><path d="M60 30 l6 14 10 -2z M140 30 l-6 14 -10 -2z" fill="#FFC9D2"/>
+    <circle cx="100" cy="88" r="48" fill="#FFFBF4" ${pS}/><path d="M54 80 Q60 44 96 42 Q86 66 58 96Z" fill="#F0A04B"/><path d="M146 80 Q140 44 106 42 Q118 66 142 96Z" fill="#2b2b30"/>
+    ${pEyes(88, o.sleep)}<path d="M95 102 h10 l-5 6z" fill="#F3A0B0"/><path d="M100 108 v3 M92 112 q4 4 8 0 q4 4 8 0" fill="none" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/><path d="M60 104 h-18 M60 110 h-16 M140 104 h18 M140 110 h16" stroke="#bbb" stroke-width="1.6"/>${pBlush(106)}`
+};
+/* 各時期配件：成長期領巾＋聽診器、進階期急診手術帽＋急救包、Leader 期背心＋大聲公＋光芒（男女都適用） */
+const PET_ACC = {
+  scarf: c => `<path d="M64 126 Q100 146 136 126 L134 138 Q100 156 66 138Z" fill="${c}" ${pS}/><path d="M118 136 l10 18 -12 -4z" fill="${c}" ${pS} stroke-linejoin="round"/>`,
+  cap: () => `<path d="M56 62 Q56 24 100 22 Q144 24 144 62 Q100 50 56 62Z" fill="#2A9D8F" ${pS}/><path d="M56 62 Q100 48 144 62 L142 70 Q100 58 58 70Z" fill="#23867A" ${pS}/>${[[74, 40], [96, 32], [120, 38], [86, 50], [110, 48], [132, 52]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.2" fill="#BFEDE6"/>`).join("")}<text x="100" y="47" font-size="13" font-weight="900" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif">ER</text>`,
+  steth: () => `<path d="M76 128 Q72 156 92 162 Q108 166 112 150" fill="none" stroke="#5A6B7A" stroke-width="4" stroke-linecap="round"/><path d="M124 128 Q128 150 116 156" fill="none" stroke="#5A6B7A" stroke-width="4" stroke-linecap="round"/><circle cx="113" cy="149" r="7" fill="#C9D3DB" ${pS}/><circle cx="113" cy="149" r="3" fill="#8A99A6"/>`,
+  kit: () => `<rect x="138" y="140" width="38" height="30" rx="6" fill="#E5484D" ${pS}/><rect x="150" y="134" width="14" height="8" rx="3" fill="none" stroke="${POL}" stroke-width="3"/><path d="M157 147 v16 M149 155 h16" stroke="#fff" stroke-width="4"/>`,
+  vest: () => `<path d="M64 128 Q100 146 136 128 L138 172 Q100 184 62 172Z" fill="#FF8A1F" opacity=".95" ${pS}/><path d="M64 152 Q100 166 136 152" stroke="#FFF36B" stroke-width="6" fill="none"/>`,
+  horn: () => `<g transform="rotate(-24 40 140)"><path d="M24 132 L52 122 L52 154 L24 144Z" fill="#F5F5F5" ${pS} stroke-linejoin="round"/><rect x="16" y="132" width="10" height="12" rx="2" fill="#6650C0" stroke="${POL}" stroke-width="2"/><path d="M58 126 q8 12 0 24" fill="none" stroke="#6650C0" stroke-width="3" stroke-linecap="round"/></g>`
+};
+function petSVG(sp, stage, opt = {}){ return to3D(petSVG0(sp, stage, opt)); }
+function petSVG0(sp, stage, opt = {}){
+  const D = PET_DRAW[sp] || PET_DRAW.bear, c = (PET_SP[sp] || PET_SP.bear).c;
+  if (stage <= 0) return `<svg viewBox="0 0 200 210" class="petsvg" role="img" aria-label="${PET_SP[sp].n}・幼年期"><ellipse cx="100" cy="196" rx="70" ry="8" fill="#000" opacity=".1"/>
+    <g transform="translate(100 128) scale(.78) translate(-100 -100)">${D({ sleep: !opt.awake, tails: 1 })}</g>
+    <path d="M24 156 Q100 126 176 156 L168 198 Q100 212 32 198Z" fill="#A9D3F5" ${pS}/><path d="M34 166 Q100 142 166 166" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="6 7"/>
+    ${opt.awake ? "" : `<text x="150" y="70" font-size="22" fill="#7a8a9a">z</text><text x="164" y="52" font-size="15" fill="#7a8a9a">z</text>`}</svg>`;
+  const acc = stage === 1 ? [PET_ACC.scarf(c), PET_ACC.steth()] : stage === 2 ? [PET_ACC.scarf(c), PET_ACC.steth(), PET_ACC.cap(), PET_ACC.kit()] : [PET_ACC.vest(), PET_ACC.steth(), PET_ACC.cap(), PET_ACC.horn(), PET_ACC.kit()];
+  const sc = [.8, .86, .93, 1][stage], glow = stage === 3;
+  return `<svg viewBox="0 0 200 210" class="petsvg" role="img" aria-label="${PET_SP[sp].n}・${PET_STAGE[stage]}">${glow ? `<defs><radialGradient id="pg${sp}"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".95"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="110" r="98" fill="url(#pg${sp})"/>` : ""}
+    <ellipse cx="100" cy="194" rx="54" ry="7" fill="#000" opacity=".12"/>
+    <g transform="translate(100 196) scale(${sc}) translate(-100 -196)">${D({ tails: sp === "fox" ? [1, 1, 3, 9][stage] : 1, wing: stage >= 2 })}${acc.join("")}</g>
+    ${glow ? [[26, 40], [170, 50], [20, 150], [180, 138]].map(([x, y]) => `<path d="M${x} ${y - 9} l3 6 6 3 -6 3 -3 6 -3 -6 -6 -3 6 -3z" fill="#F5C518"/>`).join("") : ""}</svg>`;
+}
+const petArt = (sp, stage, opt) => PET_IMG[sp] && PET_IMG[sp][stage] ? `<img class="petimg" src="${PET_IMG[sp][stage]}" alt="${esc(PET_SP[sp].n)}・${PET_STAGE[stage]}" decoding="async">` : petSVG(sp, stage, opt);
+
+/* ================= 急診學習站寵物（er-pet）：學習站闖關與團隊擬真的成果，養成陪你長大的急診夥伴 ================= */
+const PET_VER = "2026.10.27-a";
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ACC = window.ACCOUNT || null;
+const API = String((window.ER_CONFIG && window.ER_CONFIG.DRILL_API) || "").trim();
+const HUB = "https://cych05845-jpg.github.io/er-learn/", SIMU = "https://cych05845-jpg.github.io/er-sim/";
+const ZQ = { c: "cquest", o: "oquest", p: "pquest", r: "rquest", t: "tquest", l: "lquest", s: "squest" };
+const ZORDER = ["c", "o", "p", "r", "t", "l", "s"];
+const DAY_GOAL = 1;
+PET_XP.toy = 25;
+function toast(msg, bad){ const t = $("toast"); t.textContent = msg; t.className = "toast show" + (bad ? " bad" : ""); clearTimeout(t._h); t._h = setTimeout(() => t.className = "toast", 2600); }
+const dayKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+async function api(action, b){
+  b = Object.assign({}, b || {}, { action }); const t = ACC && ACC.token && ACC.token(); if (t) b.token = t;
+  if (!API) return demoApi(action, b);
+  for (let k = 0; k < 2; k++) { try { const r = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(b) }); return await r.json(); } catch (e) { if (k) return { ok: false, error: "連不上伺服器，請檢查網路" }; await new Promise(r => setTimeout(r, 700)); } }
+}
+/* 示範模式（沒有設定後端）：假資料存在這台電腦 */
+function demoApi(action, b){
+  const k = "erpet-demo"; let D; try { D = JSON.parse(localStorage.getItem(k) || "null"); } catch (e) {}
+  if (!D) D = { data: { "quest-c": { 0: 3, 1: 3, 2: 2, 3: 3, 4: 3, 5: 1, 6: 3 }, "quest-o": { 0: 2, 1: 3 }, daily: { [dayKey()]: { pass: 2, try: 1 } }, __zones: { c: { n: 7, tot: 7, name: "治療區" }, o: { n: 2, tot: 7, name: "留觀區" }, p: { n: 0, tot: 8, name: "兒科" }, r: { n: 0, tot: 19, name: "急救區" }, t: { n: 0, tot: 12, name: "檢傷" }, l: { n: 0, tot: 17, name: "Leader" }, s: { n: 0, tot: 10, name: "特殊教學" } } }, sims: 3, stars: 4 };
+  if (action === "petMe") return { ok: true, me: { emp: "00000", name: "示範學員" }, data: D.data, sims: D.sims, stars: D.stars, simList: [{ d: dayKey(), c: "正式教案①", role: "Leader", res: "ROSC" }], team: { name: "示範隊", emoji: "🦊", color: "#C63D2F" } };
+  if (action === "petSave") { D.data.pet = JSON.parse(b.pet); try { localStorage.setItem(k, JSON.stringify(D)); } catch (e) {} return { ok: true, pet: D.data.pet }; }
+  return { ok: false, error: "示範模式" };
+}
+const ME = () => (ACC && ACC.cachedUser && ACC.cachedUser()) || (!API ? { name: "示範學員", empId: "00000" } : null);
+
+/* ---------- 狀態 ---------- */
+const G = { data: null, sims: 0, stars: 0, team: null, simList: [], me: null, tab: "home", room: null };
+const zoneInfo = z => (G.data.__zones || {})[z] || null;
+const zoneDone = z => { const q = zoneInfo(z); return !!q && q.tot > 0 && q.n >= q.tot; };
+function earned(){
+  let food = 0, snack = 0, passed = 0; Object.keys(G.data).filter(k => /^quest-/.test(k)).forEach(k => Object.values(G.data[k] || {}).forEach(v => { if (v > 0) { food++; passed++; } if (v >= 3) snack++; }));
+  const P = G.data.pet, D = G.data.daily || {}, days = new Set((P && P.wd) || []);
+  Object.keys(D).forEach(k => { if ((D[k].pass || 0) >= DAY_GOAL) days.add(k); });
+  return { food, snack, water: days.size, toy: G.sims, days: [...days].sort(), passed };
+}
+function st(){
+  const P = G.data.pet; if (!P) return null;
+  const E = earned(), fed = Object.assign({ food: 0, water: 0, snack: 0, toy: 0 }, P.fed || {});
+  const have = {}; ["food", "water", "snack", "toy"].forEach(k => have[k] = Math.max(0, E[k] - fed[k]));
+  const xp = P.xp || 0, lv = Math.floor(xp / 100) + 1, stage = P.stage || 0, gate = PET_GATE[stage + 1];
+  const gz = gate ? (gate.any || gate.all).map(z => ({ z, n: ZONE_NAME[z], ok: zoneDone(z), q: zoneInfo(z) })) : [];
+  const zoneOk = gate ? (gate.any ? gz.some(x => x.ok) : gz.every(x => x.ok)) : false;
+  return { P, E, have, xp, lv, stage, gate, gz, zoneOk, can: !!gate && xp >= gate.xp && zoneOk, total: have.food + have.water + have.snack + have.toy, zonesDone: ZORDER.filter(zoneDone) };
+}
+let SAVE_T = 0;
+function save(now){ clearTimeout(SAVE_T); SAVE_T = setTimeout(async () => { const r = await api("petSave", { pet: JSON.stringify(G.data.pet) });
+  if (r && r.conflict && r.pet) { G.data.pet = r.pet; toast(r.error); paint(); } else if (!r || !r.ok) toast((r && r.error) || "儲存失敗，稍後會再試", true); }, now ? 30 : 900); }
+
+/* ---------- 換裝：闖完一區解鎖那一區的配件 ---------- */
+const OUT = {
+  none: { n: "不戴", slot: "*", z: "" },
+  scarf: { n: "夥伴領巾", slot: "neck", z: "", g: c => PET_ACC.scarf(c) },
+  obs: { n: "留觀條紋圍巾", slot: "neck", z: "o", g: () => `<path d="M64 126 Q100 146 136 126 L134 138 Q100 156 66 138Z" fill="#7AB8E8" ${pS}/>${[72, 86, 100, 114, 128].map(x => `<path d="M${x} ${x === 100 ? 145 : 140} l4 -10" stroke="#fff" stroke-width="4"/>`).join("")}<path d="M118 136 l10 18 -12 -4z" fill="#7AB8E8" ${pS}/>` },
+  treat: { n: "急診手術帽", slot: "head", z: "c", g: () => PET_ACC.cap() },
+  steth: { n: "聽診器", slot: "neck", z: "c", g: () => PET_ACC.steth() },
+  peds: { n: "安撫奶嘴", slot: "face", z: "p", g: () => `<ellipse cx="100" cy="118" rx="13" ry="8" fill="#8ED1C6" ${pS}/><circle cx="100" cy="128" r="6" fill="none" stroke="#F6A6B2" stroke-width="4"/>` },
+  resus: { n: "電擊愛心徽章", slot: "body", z: "r", g: () => `<path d="M100 174 C80 160 78 142 90 140 C96 139 100 144 100 148 C100 144 104 139 110 140 C122 142 120 160 100 174Z" fill="#E5484D" ${pS}/><path d="M102 146 l-6 10 h8 l-6 10" fill="none" stroke="#FFE066" stroke-width="3" stroke-linejoin="round"/>` },
+  kit: { n: "急救包", slot: "hand", z: "r", g: () => PET_ACC.kit() },
+  triage: { n: "紅黃綠燈牌", slot: "hand", z: "t", g: () => `<line x1="160" y1="118" x2="160" y2="172" stroke="${POL}" stroke-width="4"/><rect x="148" y="96" width="26" height="54" rx="8" fill="#2b2f36" ${pS}/><circle cx="161" cy="108" r="6" fill="#E5484D"/><circle cx="161" cy="123" r="6" fill="#F5C518"/><circle cx="161" cy="138" r="6" fill="#30A46C"/>` },
+  vest: { n: "Leader 指揮背心", slot: "body", z: "l", g: () => PET_ACC.vest() },
+  horn: { n: "大聲公", slot: "hand2", z: "l", g: () => PET_ACC.horn() },
+  star: { n: "特殊任務徽章", slot: "head", z: "s", g: () => `<path d="M100 26 l7 14 15 2 -11 10 3 15 -14 -7 -14 7 3 -15 -11 -10 15 -2z" fill="#F5C518" ${pS} stroke-linejoin="round"/>` }
+};
+const SLOTS = [["head", "頭"], ["face", "臉"], ["neck", "脖子"], ["body", "身上"], ["hand", "右手"], ["hand2", "左手"]];
+const outOpen = k => !OUT[k].z || zoneDone(OUT[k].z);
+function defOutfit(stage){ return stage === 0 ? {} : stage === 1 ? { neck: "steth" } : stage === 2 ? { neck: "steth", head: "treat", hand: "kit" } : { body: "vest", neck: "steth", head: "treat", hand2: "horn", hand: "kit" }; }
+function draw(sp, stage, outfit, opt = {}){
+  if (PET_IMG[sp] && PET_IMG[sp][stage]) return `<div class="pimgw"><img class="petimg" src="${PET_IMG[sp][stage]}" alt="${esc(PET_SP[sp].n)}" decoding="async">${outfit ? `<div class="obadges">${Object.values(outfit).filter(k => k && OUT[k] && OUT[k].z).map(k => `<span>${esc(OUT[k].n)}</span>`).join("")}</div>` : ""}</div>`;
+  if (stage <= 0 && !outfit) return petSVG(sp, 0, opt);
+  if (!outfit) return petSVG(sp, stage, opt);
+  const D = PET_DRAW[sp], c = PET_SP[sp].c, sc = [.8, .86, .93, 1][stage], glow = stage === 3;
+  const acc = SLOTS.map(s => outfit[s[0]]).filter(k => k && OUT[k] && OUT[k].g).map(k => OUT[k].g(c)).join("");
+  return to3D(`<svg viewBox="0 0 200 210" class="petsvg" role="img" aria-label="${PET_SP[sp].n}">${glow ? `<defs><radialGradient id="g${sp}"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".95"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="110" r="98" fill="url(#g${sp})"/>` : ""}
+    <ellipse cx="100" cy="194" rx="54" ry="7" fill="#000" opacity=".12"/><g transform="translate(100 196) scale(${sc}) translate(-100 -196)">${D({ tails: sp === "fox" ? [1, 1, 3, 9][stage] : 1, wing: stage >= 2, sleep: opt.sleep })}${acc}</g>
+    ${glow ? [[26, 40], [170, 50], [20, 150], [180, 138]].map(([x, y]) => `<path d="M${x} ${y - 9} l3 6 6 3 -6 3 -3 6 -3 -6 -6 -3 6 -3z" fill="#F5C518"/>`).join("") : ""}</svg>`);
+}
+/* 造型（skin）：整套換。正式插圖到了，在 PET_SKIN_IMG 填檔名就會整張換圖；還沒有圖時用配件組合示意 */
+const SKINS = [
+  { id: "base", n: "本期造型", z: "", d: "跟著進化自動換" },
+  { id: "treat", n: "治療區護理師", z: "c", d: "急診手術帽＋聽診器＋急救包", out: { head: "treat", neck: "steth", hand: "kit" } },
+  { id: "obs", n: "留觀守夜", z: "o", d: "條紋圍巾", out: { neck: "obs" } },
+  { id: "peds", n: "兒科好朋友", z: "p", d: "安撫奶嘴＋領巾", out: { face: "peds", neck: "scarf" } },
+  { id: "resus", n: "急救先鋒", z: "r", d: "急診手術帽＋電擊愛心＋急救包", out: { head: "treat", body: "resus", hand: "kit" } },
+  { id: "triage", n: "檢傷官", z: "t", d: "急診手術帽＋紅黃綠燈牌", out: { head: "treat", hand: "triage" } },
+  { id: "leader", n: "Leader 指揮", z: "l", d: "指揮背心＋大聲公＋燈牌", out: { body: "vest", hand2: "horn", hand: "triage" } },
+  { id: "spec", n: "特殊任務", z: "s", d: "星星徽章＋電擊愛心", out: { head: "star", body: "resus" } }
+];
+const PET_SKIN_IMG = {};   // 例：bear: { treat: "pets/bear-treat.webp", leader: "pets/bear-leader.webp" }
+const skinOf = S => SKINS.find(k => k.id === S.P.skin && (!k.z || zoneDone(k.z))) || SKINS[0];
+const outfitOf = S => { const k = skinOf(S); return k.out || defOutfit(S.stage); };
+function petNow(S, sk){ const k = sk || skinOf(S), sp = S.P.sp, im = PET_SKIN_IMG[sp] && PET_SKIN_IMG[sp][k.id];
+  return im ? `<img class="petimg" src="${im}" alt="${esc(PET_SP[sp].n)}・${esc(k.n)}" decoding="async">` : draw(sp, S.stage, k.out || defOutfit(S.stage)); }
+
+/* ---------- 小屋背景 ---------- */
+const ROOMS = [
+  { id: "home", n: "溫馨小屋", need: () => true, how: "一開始就有", svg: () => `<rect width="400" height="260" fill="#FBE9D7"/><rect y="190" width="400" height="70" fill="#E3B98E"/><path d="M0 190 H400" stroke="#C99A6E" stroke-width="3"/>
+      <rect x="40" y="40" width="96" height="78" rx="8" fill="#BFE3F7" stroke="#B88A5E" stroke-width="6"/><path d="M88 40 V118 M40 79 H136" stroke="#B88A5E" stroke-width="4"/><circle cx="66" cy="62" r="10" fill="#FFF6C9"/>
+      <rect x="282" y="60" width="86" height="12" rx="3" fill="#B88A5E"/><rect x="292" y="34" width="14" height="26" rx="2" fill="#E5484D"/><rect x="310" y="40" width="12" height="20" rx="2" fill="#3B7FE6"/><circle cx="346" cy="48" r="12" fill="#5DBB73"/><rect x="340" y="52" width="12" height="10" fill="#B88A5E"/>
+      <ellipse cx="200" cy="222" rx="130" ry="22" fill="#F4C7C3" opacity=".9"/><ellipse cx="200" cy="222" rx="104" ry="16" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="8 8"/>` },
+  { id: "ed", n: "急診休息室", need: S => S.lv >= 5, how: "Lv.5 解鎖", svg: () => `<rect width="400" height="260" fill="#DCEBF5"/><rect y="192" width="400" height="68" fill="#B7CAD8"/><path d="M0 192 H400" stroke="#8FA6B8" stroke-width="3"/>
+      <rect x="30" y="36" width="110" height="70" rx="8" fill="#14202B"/><path d="M40 76 h20 l8 -18 8 34 8 -16 h46" fill="none" stroke="#4BE08A" stroke-width="3"/><text x="44" y="54" fill="#4BE08A" font-size="12" font-family="monospace">HR 72</text>
+      <rect x="290" y="44" width="80" height="54" rx="6" fill="#fff" stroke="#8FA6B8" stroke-width="3"/><path d="M302 60 h56 M302 72 h40 M302 84 h48" stroke="#C3D2DE" stroke-width="4"/>
+      <rect x="312" y="150" width="34" height="40" rx="6" fill="#fff" stroke="#8FA6B8" stroke-width="3"/><path d="M346 160 q14 4 0 18" fill="none" stroke="#8FA6B8" stroke-width="3"/><path d="M322 140 q4 -8 0 -14 M334 140 q4 -8 0 -14" stroke="#C3D2DE" stroke-width="3" fill="none"/>
+      <rect x="50" y="160" width="40" height="32" rx="4" fill="#E5484D"/><path d="M70 166 v20 M60 176 h20" stroke="#fff" stroke-width="5"/>` },
+  { id: "sky", n: "星空草地", need: S => S.stage >= 2, how: "進化到進階期解鎖", svg: () => `<defs><linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B2A55"/><stop offset="1" stop-color="#4B5FA8"/></linearGradient></defs><rect width="400" height="260" fill="url(#skyg)"/>
+      ${[[40, 30], [90, 60], [150, 24], [220, 50], [280, 20], [340, 64], [370, 30], [120, 100], [310, 110]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2" fill="#fff"/>`).join("")}<circle cx="330" cy="50" r="22" fill="#FFF3B0"/><circle cx="340" cy="44" r="20" fill="url(#skyg)"/>
+      <path d="M0 196 Q100 170 200 190 T400 186 V260 H0Z" fill="#3E7D4F"/><path d="M0 214 Q120 196 240 212 T400 208 V260 H0Z" fill="#4E9A60"/>` }
+];
+const roomOf = S => ROOMS.find(r => r.id === (S.P.room || "home") && r.need(S)) || ROOMS[0];
+
+/* ---------- 頁首與分頁 ---------- */
+const TABS = [["home", "🏠", "小屋"], ["task", "📋", "任務"], ["dress", "👕", "換裝"], ["dex", "📖", "圖鑑"], ["rec", "📊", "紀錄"]];
+function shell(){
+  const u = ME();
+  $("app").innerHTML = `<header class="top"><a class="brand" href="#home"><span class="logo">🐾</span><span><b>急診學習站寵物</b><small>陪你一起成長的急診夥伴</small></span></a><div class="topr" id="topr"></div></header>
+    <nav class="tabs" id="tabs">${TABS.map(t => `<a href="#${t[0]}" data-t="${t[0]}"><i>${t[1]}</i><span>${t[2]}</span></a>`).join("")}</nav>
+    <main id="main"><p class="hint">讀取中…</p></main><div class="toast" id="toast"></div>`;
+}
+function topr(S){
+  const u = G.me || ME();
+  $("topr").innerHTML = `${G.team ? `<span class="tteam" style="--tc:${esc(G.team.color)}">${esc(G.team.emoji)} ${esc(G.team.name)}</span>` : ""}<div class="who"><b>${esc(u ? u.name : "")}</b>${S ? `<div class="xpm"><span>Lv.${S.lv}</span><div class="bar"><i style="width:${(S.xp % 100)}%"></i></div></div>` : ""}</div>`;
+}
+function paint(){
+  if (!G.data) return;
+  const S = st(); topr(S);
+  document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.t === G.tab));
+  $("tabs").hidden = !S;
+  if (!S) return adopt();
+  document.documentElement.style.setProperty("--pc", PET_SP[S.P.sp].c);
+  ({ home, task, dress, dex, rec }[G.tab] || home)(S);
+}
+
+/* ---------- 領養 ---------- */
+function adopt(){
+  let pick = "";
+  $("main").innerHTML = `<section class="hero"><h1>選一隻陪你成長的急診夥伴</h1><p>在學習站闖一關得 🍖 飼料、達成每日目標得 💧 水、闖關 3 星得 🍰 點心、參加團隊擬真得 🧸 玩具。闖完一區，牠就進化一次，最後和你一起成為 Leader。</p></section>
+    <div class="adopt">${PET_ORDER.map(k => { const s = PET_SP[k]; return `<button class="ac" data-sp="${k}" style="--pc:${s.c}"><div class="aca">${petSVG(k, 1)}</div><b>${esc(s.n)}</b><span>${esc(s.tag)}</span><small>${esc(s.trait)}</small></button>`; }).join("")}</div>
+    <section class="card" id="ab" hidden><b id="abT"></b><label class="fld">幫牠取名字（可以之後再改）<input id="nm" maxlength="8"></label><button class="btn big" id="go">領養！</button><p class="hint">領養後，你之前在學習站闖過的關卡也會變成飼料，可以馬上餵。</p></section>`;
+  $("main").onclick = e => { const b = e.target.closest("[data-sp]"); if (b) { pick = b.dataset.sp; document.querySelectorAll("[data-sp]").forEach(x => x.classList.toggle("on", x === b)); $("ab").hidden = false; $("abT").textContent = `你選了：${PET_SP[pick].n}（${PET_SP[pick].tag}）`; $("nm").value = PET_SP[pick].n; $("ab").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+    if (e.target.closest("#go") && pick) { G.data.pet = { sp: pick, name: ($("nm").value || "").trim().slice(0, 8) || PET_SP[pick].n, stage: 0, xp: 0, fed: { food: 0, water: 0, snack: 0, toy: 0 }, aff: 1, born: dayKey(), wd: [] }; save(true); confetti(); G.tab = "home"; location.hash = "home"; paint(); } };
+}
+
+/* ---------- 小屋（首頁） ---------- */
+const SAY = ["辛苦了！今天也一起加油吧！", "你學會一件事，我就長大一點點。", "交班辛苦了，先喝口水。", "我在這裡等你闖下一關！", "累了就摸摸我，休息一下。", "有不懂的，記得問學長姐喔。", "今天的你，比昨天多會一點。"];
+const HUNGRY = ["我聞到飼料的味道了！", "可以餵我嗎？", "肚子咕嚕咕嚕…"];
+function home(S){
+  const sp = PET_SP[S.P.sp], nx = S.gate ? S.gate.xp : S.xp, aff = Math.min(5, S.P.aff || 0), R = roomOf(S), today = dayKey();
+  $("main").innerHTML = `<div class="homeg">
+    <section class="room"><svg class="roombg" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">${R.svg()}</svg>
+      <div class="bub" id="bub">${esc(S.total ? HUNGRY[new Date().getHours() % 3] : SAY[new Date().getDate() % SAY.length])}</div>
+      <div class="petw" id="pet" role="button" tabindex="0" aria-label="摸摸牠">${petNow(S)}</div>
+      <div class="acts">${[["pat", "💗", "摸摸"], ["feed", "🍖", "餵食"], ["play", "🧸", "玩耍"], ["cheer", "📣", "加油"], ["sleep", "💤", "睡覺"]].map(a => `<button data-act="${a[0]}"><i>${a[1]}</i><span>${a[2]}</span></button>`).join("")}</div></section>
+    <section class="card info"><div class="ih"><h2>${esc(S.P.name || sp.n)}</h2><button class="mini" id="rn">改名</button></div>
+      <div class="itag"><span class="lvp">Lv.${S.lv}</span><b>${S.stage === 3 && sp.last ? sp.last : PET_STAGE[S.stage]}</b><small>${esc(sp.n)}・${esc(sp.st[S.stage])}</small></div>
+      <div class="bar big"><i style="width:${S.gate ? Math.min(100, S.xp / nx * 100) : 100}%"></i></div><small>${S.gate ? `經驗 ${S.xp} / ${nx}・下一階段：${PET_STAGE[S.stage + 1]}` : `經驗 ${S.xp}・最終型態`}</small>
+      <div class="aff">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= aff ? "on" : ""}">♥</i>`).join("")}<small>親密度</small></div>
+      <div class="feed" id="feed">${[["food", "🍖", "飼料"], ["water", "💧", "水"], ["snack", "🍰", "點心"], ["toy", "🧸", "玩具"]].map(([k, ic, n]) => `<button data-feed="${k}" ${S.have[k] ? "" : "disabled"}><i>${ic}</i><b>${n} ×${S.have[k]}</b><small>+${PET_XP[k]} 經驗</small></button>`).join("")}</div>
+      ${S.total > 1 ? `<button class="btn" id="all">全部餵完（${S.total} 份）</button>` : S.total ? "" : `<p class="hint">食物吃完了，去<a href="#task">做任務</a>拿更多吧！</p>`}
+      ${S.gate ? `<div class="gate ${S.can ? "ok" : ""}"><b>進化到「${PET_STAGE[S.stage + 1]}」需要</b><span class="${S.xp >= S.gate.xp ? "y" : ""}">${S.xp >= S.gate.xp ? "✓" : "○"} 經驗 ${S.gate.xp}（目前 ${S.xp}）</span>
+        <span class="${S.zoneOk ? "y" : ""}">${S.zoneOk ? "✓" : "○"} ${esc(S.gate.txt)}：${S.gz.map(x => `${x.n} ${x.q ? `${x.q.n}/${x.q.tot}` : "—"}`).join("、")}</span>${S.can ? `<button class="btn big" id="evo">✨ 進化！</button>` : ""}</div>` : `<div class="gate ok"><b>🎉 最終型態：${esc(sp.st[3])}</b></div>`}
+      ${G.data.__zones ? "" : `<p class="hint warn">還沒有學習站的區域進度：請用員編登入學習站並打開一次，進度就會同步過來。</p>`}</section></div>
+    <section class="card"><h3>成長路線</h3><div class="evo">${[0, 1, 2, 3].map(i => `<div class="ev ${i <= S.stage ? "on" : ""} ${i === S.stage ? "now" : ""}"><span class="lvb">Lv.${i + 1}　${i === 3 && sp.last ? sp.last : PET_STAGE[i]}</span>${i <= S.stage ? petArt(S.P.sp, i) : `<div class="lock">${petSVG(S.P.sp, i)}</div>`}<small>${esc(sp.st[i])}</small><em>${i ? esc(PET_GATE[i].txt) : "領養"}</em></div>`).join("")}</div></section>
+    <section class="card"><h3>小屋背景</h3><div class="rooms">${ROOMS.map(r => { const ok = r.need(S); return `<button class="rm ${R.id === r.id ? "on" : ""}" data-room="${r.id}" ${ok ? "" : "disabled"}><svg viewBox="0 0 400 260">${r.svg()}</svg><b>${r.n}</b><small>${ok ? (R.id === r.id ? "使用中" : "點一下換上") : "🔒 " + r.how}</small></button>`; }).join("")}</div></section>`;
+  const P = S.P;
+  const say = (t, cls) => { const b = $("bub"); b.textContent = t; b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); const p = $("pet"); p.className = "petw"; void p.offsetWidth; if (cls) p.classList.add(cls); };
+  const hearts = (ch = "♥") => { const p = $("pet"); for (let i = 0; i < 5; i++) { const h = document.createElement("i"); h.className = "fx"; h.textContent = ch; h.style.left = (25 + Math.random() * 50) + "%"; h.style.animationDelay = i * .1 + "s"; p.appendChild(h); setTimeout(() => h.remove(), 1700); } };
+  const affUp = () => { if (P.pat !== today) { P.pat = today; P.aff = Math.min(5, (P.aff || 0) + 1); save(); setTimeout(paint, 1400); } };
+  const feed = (k, n) => { const S2 = st(); n = Math.min(n, S2.have[k]); if (!n) return 0; P.fed = Object.assign({ food: 0, water: 0, snack: 0, toy: 0 }, P.fed); P.fed[k] += n; P.xp = (P.xp || 0) + n * PET_XP[k]; if (P.fedDay !== today) { P.fedDay = today; P.aff = Math.min(5, (P.aff || 0) + 1); } P.wd = S2.E.days; save(); return n * PET_XP[k]; };
+  $("pet").onclick = () => { affUp(); hearts(); say(S.total ? HUNGRY[Math.floor(Math.random() * 3)] : SAY[Math.floor(Math.random() * SAY.length)], "bounce"); };
+  $("main").onclick = e => {
+    const a = e.target.closest("[data-act]");
+    if (a) { const k = a.dataset.act;
+      if (k === "pat") { affUp(); hearts(); say("好舒服～最喜歡你了！", "bounce"); }
+      if (k === "feed") { if (!st().total) return say("沒有食物了…去任務頁看看怎麼拿！", "shake"); const g = ["snack", "food", "water", "toy"].reduce((x, f) => x || (feed(f, 1) && f), ""); hearts(g === "snack" ? "🍰" : g === "water" ? "💧" : g === "toy" ? "🧸" : "🍖"); say(`好好吃！經驗 +${PET_XP[g]}`, "bounce"); setTimeout(paint, 1300); }
+      if (k === "play") { if (st().have.toy) { feed("toy", 1); hearts("🧸"); say(`一起玩好開心！經驗 +${PET_XP.toy}`, "spin"); setTimeout(paint, 1300); } else { hearts("⭐"); say("來玩吧！（參加團隊擬真可以拿到玩具喔）", "spin"); } }
+      if (k === "cheer") { hearts("✨"); say(["今天也一起加油！", "你一定可以的！", "下一關交給你了！"][Math.floor(Math.random() * 3)], "jump"); }
+      if (k === "sleep") { say("呼…呼…（下班也要好好睡覺喔）", "sleep"); }
+      return; }
+    const f = e.target.closest("[data-feed]"); if (f) { const g = feed(f.dataset.feed, 1); if (g) { hearts({ food: "🍖", water: "💧", snack: "🍰", toy: "🧸" }[f.dataset.feed]); say(`好好吃！經驗 +${g}`, "bounce"); setTimeout(paint, 1200); } return; }
+    if (e.target.closest("#all")) { let g = 0; ["food", "water", "snack", "toy"].forEach(k => g += feed(k, 9999)); hearts(); say(`吃飽飽！經驗 +${g}`, "bounce"); setTimeout(paint, 1300); return; }
+    if (e.target.closest("#evo")) return evolve();
+    if (e.target.closest("#rn")) { const n = prompt("幫牠取個名字（最多 8 個字）", P.name || PET_SP[P.sp].n); if (n === null) return; P.name = n.trim().slice(0, 8) || PET_SP[P.sp].n; save(); paint(); return; }
+    const r = e.target.closest("[data-room]"); if (r) { P.room = r.dataset.room; save(); paint(); }
+  };
+}
+function evolve(){
+  const S = st(); if (!S || !S.can) return;
+  const P = S.P, from = S.stage, to = from + 1, sp = PET_SP[P.sp];
+  P.stage = to; save(true);
+  const ov = document.createElement("div"); ov.className = "evov";
+  ov.innerHTML = `<div class="evbox"><div class="evart"><div class="evf">${draw(P.sp, from)}</div><div class="evt">${draw(P.sp, to)}</div></div><h2>✨ ${esc(P.name || sp.n)} 進化了！</h2><b>${to === 3 && sp.last ? sp.last : PET_STAGE[to]}・${esc(sp.st[to])}</b><button class="btn big" id="evok">太棒了！</button></div>`;
+  document.body.appendChild(ov); confetti(); $("evok").onclick = () => { ov.remove(); paint(); };
+}
+
+/* ---------- 任務：去哪裡拿食物 ---------- */
+function task(S){
+  const D = G.data.daily || {}, t = D[dayKey()] || { pass: 0 }, zi = ZORDER.map(z => ({ z, q: zoneInfo(z) })).filter(x => x.q);
+  $("main").innerHTML = `<section class="card"><h3>可以餵的食物</h3><div class="haves">${[["food", "🍖", "飼料"], ["water", "💧", "水"], ["snack", "🍰", "點心"], ["toy", "🧸", "玩具"]].map(([k, ic, n]) => `<div><i>${ic}</i><b>${S.have[k]}</b><small>${n}</small></div>`).join("")}</div>${S.total ? `<a class="btn" href="#home">回小屋餵牠 →</a>` : ""}</section>
+    <section class="card"><h3>今日任務</h3><div class="tasks">
+      <a class="tk ${t.pass >= DAY_GOAL ? "done" : ""}" href="${HUB}" target="_blank" rel="noopener"><i>💧</i><div><b>每日目標：今天過 1 關</b><small>得 💧 水 ×1・+${PET_XP.water} 經驗</small></div><em>${t.pass >= DAY_GOAL ? "已完成" : "去學習站 ↗"}</em></a>
+      <a class="tk" href="${SIMU}" target="_blank" rel="noopener"><i>🧸</i><div><b>參加一場團隊擬真</b><small>每場得 🧸 玩具 ×1・+${PET_XP.toy} 經驗・目前參加 ${G.sims} 場</small></div><em>去團隊擬真 ↗</em></a></div></section>
+    <section class="card"><h3>闖關地圖（每關 🍖、3 星再加 🍰）</h3>${zi.length ? `<div class="tasks">${zi.map(({ z, q }) => `<a class="tk ${q.n >= q.tot ? "done" : ""}" href="${HUB}#${ZQ[z]}" target="_blank" rel="noopener"><i>${q.n >= q.tot ? "✅" : "🗺"}</i><div><b>${esc(q.name || ZONE_NAME[z])}</b><div class="bar"><i style="width:${q.tot ? q.n / q.tot * 100 : 0}%"></i></div><small>${q.n} / ${q.tot} 關${q.n >= q.tot ? "・已全破，解鎖配件與圖鑑" : ""}</small></div><em>${q.n >= q.tot ? "全破" : "去闖關 ↗"}</em></a>`).join("")}</div>`
+      : `<p class="hint">還沒有學習站的進度。請用員編登入學習站並打開一次，進度就會同步過來。</p><a class="btn" href="${HUB}" target="_blank" rel="noopener">打開學習站 ↗</a>`}</section>`;
+  $("main").onclick = null;
+}
+
+/* ---------- 換裝 ---------- */
+function dress(S){
+  const cur = skinOf(S), n = SKINS.filter(k => !k.z || zoneDone(k.z)).length;
+  $("main").innerHTML = `<div class="dressg"><section class="card dprev"><div class="petw big">${petNow(S)}</div><b>${esc(cur.n)}</b><small class="hint">${esc(cur.d)}</small></section>
+    <section class="card"><h3>造型 <small>${n} / ${SKINS.length}・闖完一張闖關地圖解鎖一套</small></h3><div class="skins">${SKINS.map(k => { const ok = !k.z || zoneDone(k.z);
+      return `<button class="sk ${cur.id === k.id ? "on" : ""}" data-skin="${k.id}" ${ok ? "" : "disabled"}><div class="ska ${ok ? "" : "lock"}">${petNow(S, k)}</div><b>${ok ? "" : "🔒 "}${esc(k.n)}</b><small>${ok ? (cur.id === k.id ? "使用中" : esc(k.d)) : `闖完${esc(ZONE_NAME[k.z])}解鎖`}</small></button>`; }).join("")}</div>
+      <p class="hint">造型會整套換上；之後正式 3D 插圖到了，每套造型都是一張完整的圖。</p></section></div>`;
+  $("main").onclick = e => { const b = e.target.closest("[data-skin]"); if (b && !b.disabled) { S.P.skin = b.dataset.skin; save(); paint(); } };
+}
+
+/* ---------- 圖鑑與成就 ---------- */
+function dexSet(S){ const own = S.P.sp, n = 1 + S.zonesDone.length; return new Set([own, ...PET_ORDER.filter(x => x !== own)].slice(0, n)); }
+function streak(){ const D = G.data.daily || {}; let n = 0; const d = new Date(); if (!(D[dayKey()] || {}).pass) d.setDate(d.getDate() - 1); while ((D[dayKey(d)] || {}).pass) { n++; d.setDate(d.getDate() - 1); } return n; }
+function achievements(S){
+  const fed = S.P.fed || {}, dx = dexSet(S).size;
+  return [["🍖", "第一口", "第一次餵食", (fed.food || 0) + (fed.water || 0) + (fed.snack || 0) + (fed.toy || 0) > 0], ["💗", "最好的朋友", "親密度滿 5 顆心", (S.P.aff || 0) >= 5],
+    ["🔥", "一週不間斷", "連續 7 天達成每日目標", streak() >= 7], ["✨", "第一次進化", "進化到成長期", S.stage >= 1], ["🎓", "進階護理", "進化到進階期", S.stage >= 2], ["📣", "急診 Leader", "進化到 Leader 期", S.stage >= 3],
+    ["📖", "小小收藏家", "圖鑑收集 3 隻", dx >= 3], ["🏆", "全圖鑑", "圖鑑收集 6 隻", dx >= 6], ["🚑", "團隊新秀", "參加 5 場團隊擬真", G.sims >= 5], ["⭐", "滿天星", "闖關拿 30 個 3 星", S.E.snack >= 30]];
+}
+function dex(S){
+  const d = dexSet(S), A = achievements(S);
+  $("main").innerHTML = `<section class="card"><h3>寵物圖鑑 <small>${d.size} / ${PET_ORDER.length}・每闖完一張闖關地圖解鎖一隻</small></h3><div class="dex">${PET_ORDER.map(k => { const on = d.has(k), s = PET_SP[k];
+      return `<div class="dc ${on ? "" : "lockc"}" style="--pc:${s.c}"><div class="dca">${on ? petArt(k, k === S.P.sp ? S.stage : 1) : `<div class="lock">${petSVG(k, 1)}</div>`}</div><b>${on ? esc(s.n) : "？？？"}</b><small>${on ? esc(s.tag) : "闖完下一張地圖解鎖"}</small>${on ? `<p>${esc(s.lore)}</p>` : ""}</div>`; }).join("")}</div>
+      <div class="bar"><i style="width:${d.size / PET_ORDER.length * 100}%"></i></div><small class="hint">收集完 6 隻，Leader 期會多一圈金色光芒（之後開放）。</small></section>
+    <section class="card"><h3>成就徽章 <small>${A.filter(a => a[3]).length} / ${A.length}</small></h3><div class="ach">${A.map(a => `<div class="${a[3] ? "on" : ""}"><i>${a[0]}</i><b>${a[1]}</b><small>${a[2]}</small></div>`).join("")}</div></section>`;
+  $("main").onclick = null;
+}
+
+/* ---------- 個人紀錄 ---------- */
+function rec(S){
+  const D = G.data.daily || {}, weeks = [...Array(12)].map((_, w) => { let n = 0; for (let i = 0; i < 7; i++) { const d = new Date(); d.setDate(d.getDate() - (11 - w) * 7 - (6 - i)); n += (D[dayKey(d)] || {}).pass || 0; } return n; }), mx = Math.max(1, ...weeks);
+  $("main").innerHTML = `<section class="card"><h3>我的學習紀錄</h3><div class="kpi">${[["闖過的關卡", S.E.passed, "🗺"], ["3 星關卡", S.E.snack, "⭐"], ["達成每日目標", S.E.water + " 天", "💧"], ["連續天數", streak() + " 天", "🔥"], ["團隊擬真", G.sims + " 場", "🚑"], ["寵物等級", "Lv." + S.lv, "🐾"]].map(k => `<div><i>${k[2]}</i><b>${k[1]}</b><small>${k[0]}</small></div>`).join("")}</div></section>
+    <section class="card"><h3>最近 12 週過關數</h3><div class="wk">${weeks.map((n, i) => `<div><span style="height:${n / mx * 100}%" title="${n} 關"></span><small>${i === 11 ? "本週" : ""}</small><b>${n || ""}</b></div>`).join("")}</div><p class="hint">每日紀錄只保留最近 90 天。</p></section>
+    <section class="card"><h3>團隊擬真</h3>${G.simList.length ? `<ol class="sl">${G.simList.map(x => `<li><time>${esc(x.d)}</time><b>${esc(x.c || "")}</b><span>${esc(x.role || "")}・${esc(x.res || "")}</span></li>`).join("")}</ol>` : `<p class="hint">還沒有用員編參加過團隊擬真。</p>`}</section>
+    <section class="card"><h3>各區闖關</h3><div class="tasks">${ZORDER.map(z => ({ z, q: zoneInfo(z) })).filter(x => x.q).map(({ z, q }) => `<div class="tk ${q.n >= q.tot ? "done" : ""}"><i>${q.n >= q.tot ? "✅" : "🗺"}</i><div><b>${esc(q.name || ZONE_NAME[z])}</b><div class="bar"><i style="width:${q.tot ? q.n / q.tot * 100 : 0}%"></i></div></div><em>${q.n} / ${q.tot}</em></div>`).join("") || `<p class="hint">還沒有學習站的進度。</p>`}</div></section>`;
+  $("main").onclick = null;
+}
+
+/* ---------- 撒花 ---------- */
+function confetti(){ const c = document.createElement("div"); c.className = "conf"; for (let i = 0; i < 60; i++) { const s = document.createElement("i"); s.style.left = Math.random() * 100 + "%"; s.style.background = ["#E5484D", "#F5C518", "#30A46C", "#3B7FE6", "#9C5BC9"][i % 5]; s.style.animationDelay = Math.random() * .5 + "s"; s.style.transform = `rotate(${Math.random() * 360}deg)`; c.appendChild(s); } document.body.appendChild(c); setTimeout(() => c.remove(), 2600); }
+
+/* ---------- 啟動 ---------- */
+async function load(){
+  const r = await api("petMe", {});
+  if (!r || !r.ok) { $("main").innerHTML = `<section class="card"><b>${esc((r && r.error) || "讀取失敗")}</b>${r && r.login ? `<button class="btn" id="lg">用員編登入</button>` : `<button class="btn" id="re">再試一次</button>`}</section>`;
+    $("main").onclick = e => { if (e.target.closest("#lg")) ACC && ACC.goLogin && ACC.goLogin(); if (e.target.closest("#re")) load(); }; return; }
+  G.data = r.data || {}; G.sims = r.sims || 0; G.stars = r.stars || 0; G.team = r.team; G.simList = r.simList || []; G.me = r.me;
+  paint();
+}
+function route(){ const h = (location.hash || "#home").slice(1); G.tab = TABS.some(t => t[0] === h) ? h : "home"; scrollTo(0, 0); paint(); }
+addEventListener("hashchange", route);
+shell();
+if (!ME()) { topr(null); $("tabs").hidden = true; $("main").innerHTML = `<section class="hero"><h1>🐾 急診學習站寵物</h1><p>在學習站闖關、達成每日目標、參加團隊擬真，就能養大你的急診夥伴。</p></section>
+  <section class="card login"><b>請先用員編登入</b><p class="hint">寵物跟著員編走，換手機也不會不見；學習站的闖關進度會一起帶過來。</p><button class="btn big" id="lg">用員編登入</button></section>
+  <div class="adopt preview">${PET_ORDER.map(k => `<div class="ac" style="--pc:${PET_SP[k].c}"><div class="aca">${petSVG(k, 1)}</div><b>${esc(PET_SP[k].n)}</b><span>${esc(PET_SP[k].tag)}</span></div>`).join("")}</div>`;
+  $("lg").onclick = () => ACC && ACC.goLogin ? ACC.goLogin() : toast("帳號中心沒有載入", true); }
+else { G.tab = (location.hash || "#home").slice(1) || "home"; load(); }
+
+</script></body></html>
