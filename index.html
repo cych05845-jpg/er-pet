@@ -290,7 +290,7 @@ function petSVG0(sp, stage, opt = {}){
 const petArt = (sp, stage, opt) => PET_IMG[sp] && PET_IMG[sp][stage] ? `<img class="petimg" src="${PET_IMG[sp][stage]}" alt="${esc(PET_SP[sp].n)}・${PET_STAGE[stage]}" decoding="async">` : petSVG(sp, stage, opt);
 
 /* ================= 急診學習站寵物（er-pet）：學習站闖關與團隊擬真的成果，養成陪你長大的急診夥伴 ================= */
-const PET_VER = "2026.10.27-b";
+const PET_VER = "2026.10.28-a";
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const ACC = window.ACCOUNT || null;
@@ -446,7 +446,7 @@ function home(S){
       <div class="acts">${[["pat", "🖐", "摸摸", "#E5484D"], ["feed", "🍖", "餵食", "#E58A3C"], ["play", "⚽", "玩耍", "#2F9E6B"], ["cheer", "📣", "加油", "#C99A06"], ["sleep", "🌙", "睡覺", "#5B78C7"]].map(a => `<button data-act="${a[0]}" style="--ac:${a[3]}"><i>${a[1]}</i><span>${a[2]}</span></button>`).join("")}</div></section>
     <section class="card info"><div class="ih"><h2>${esc(S.P.name || sp.n)}</h2><button class="mini" id="rn">改名</button></div>
       <div class="itag"><span class="lvp">Lv.${S.lv}</span><b>${S.stage === 3 && sp.last ? sp.last : PET_STAGE[S.stage]}</b><small>${esc(sp.n)}・${esc(sp.st[S.stage])}</small></div>
-      <div class="bar big"><i style="width:${S.gate ? Math.min(100, S.xp / nx * 100) : 100}%"></i></div><small>${S.gate ? `經驗 ${S.xp} / ${nx}・下一階段：${PET_STAGE[S.stage + 1]}` : `經驗 ${S.xp}・最終型態`}</small>
+      <div class="bar big"><i style="width:${S.gate ? Math.min(100, S.xp / nx * 100) : 100}%"></i></div><small>${S.gate ? (S.xp >= nx ? `經驗 ${S.xp}・已達進化門檻 ${nx}，再完成闖關條件就能進化` : `經驗 ${S.xp} / ${nx}・下一階段：${PET_STAGE[S.stage + 1]}`) : `經驗 ${S.xp}・最終型態`}</small>
       <div class="aff">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= aff ? "on" : ""}">♥</i>`).join("")}<small>親密度</small></div>
       ${petMeters(S)}
       <div class="label3">背包（點一下就拿去餵）</div>
@@ -455,7 +455,7 @@ function home(S){
       ${S.gate ? `<div class="gate ${S.can ? "ok" : ""}"><b>進化到「${PET_STAGE[S.stage + 1]}」需要</b><span class="${S.xp >= S.gate.xp ? "y" : ""}">${S.xp >= S.gate.xp ? "✓" : "○"} 經驗 ${S.gate.xp}（目前 ${S.xp}）</span>
         <span class="${S.zoneOk ? "y" : ""}">${S.zoneOk ? "✓" : "○"} ${esc(S.gate.txt)}：${S.gz.map(x => `${x.n} ${x.q ? `${x.q.n}/${x.q.tot}` : "—"}`).join("、")}</span>${S.can ? `<button class="btn big" id="evo">✨ 進化！</button>` : ""}</div>` : `<div class="gate ok"><b>🎉 最終型態：${esc(sp.st[3])}</b></div>`}
       ${G.data.__zones ? "" : `<p class="hint warn">還沒有學習站的區域進度：請用員編登入學習站並打開一次，進度就會同步過來。</p>`}</section></div>
-    <section class="card"><h3>成長路線</h3><div class="evo">${[0, 1, 2, 3].map(i => `<div class="ev ${i <= S.stage ? "on" : ""} ${i === S.stage ? "now" : ""}"><span class="lvb">Lv.${i + 1}　${i === 3 && sp.last ? sp.last : PET_STAGE[i]}</span>${i <= S.stage ? petArt(S.P.sp, i) : `<div class="lock">${petSVG(S.P.sp, i)}</div>`}<small>${esc(sp.st[i])}</small><em>${i ? esc(PET_GATE[i].txt) : "領養"}</em></div>`).join("")}</div></section>
+    <section class="card"><h3>成長路線</h3><div class="evo">${[0, 1, 2, 3].map(i => `<div class="ev ${i <= S.stage ? "on" : ""} ${i === S.stage ? "now" : ""}"><span class="lvb">第 ${i + 1} 階・${i === 3 && sp.last ? sp.last : PET_STAGE[i]}</span>${i <= S.stage ? petArt(S.P.sp, i) : `<div class="lock">${petSVG(S.P.sp, i)}</div>`}<small>${esc(sp.st[i])}</small><em>${i ? esc(PET_GATE[i].txt) : "領養"}</em></div>`).join("")}</div></section>
     <section class="card"><h3>小屋背景</h3><div class="rooms">${ROOMS.map(r => { const ok = r.need(S); return `<button class="rm ${R.id === r.id ? "on" : ""}" data-room="${r.id}" ${ok ? "" : "disabled"}><svg viewBox="0 0 400 260">${r.svg(S)}</svg><b>${r.n}</b><small>${ok ? (R.id === r.id ? "使用中" : "點一下換上") : "🔒 " + r.how}</small></button>`; }).join("")}</div></section>`;
   const P = S.P;
   const say = (t, cls) => { const b = $("bub"); b.textContent = t; b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); const p = $("pet"); p.className = "petw"; void p.offsetWidth; if (cls) p.classList.add(cls); };
