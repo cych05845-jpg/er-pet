@@ -290,7 +290,7 @@ function petSVG0(sp, stage, opt = {}){
 const petArt = (sp, stage, opt) => PET_IMG[sp] && PET_IMG[sp][stage] ? `<img class="petimg" src="${PET_IMG[sp][stage]}" alt="${esc(PET_SP[sp].n)}・${PET_STAGE[stage]}" decoding="async">` : petSVG(sp, stage, opt);
 
 /* ================= 急診學習站寵物（er-pet）：學習站闖關與團隊擬真的成果，養成陪你長大的急診夥伴 ================= */
-const PET_VER = "2026.10.28-a";
+const PET_VER = "2026.10.29-a";
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const ACC = window.ACCOUNT || null;
@@ -544,7 +544,10 @@ function rec(S){
 function confetti(){ const c = document.createElement("div"); c.className = "conf"; for (let i = 0; i < 60; i++) { const s = document.createElement("i"); s.style.left = Math.random() * 100 + "%"; s.style.background = ["#E5484D", "#F5C518", "#30A46C", "#3B7FE6", "#9C5BC9"][i % 5]; s.style.animationDelay = Math.random() * .5 + "s"; s.style.transform = `rotate(${Math.random() * 360}deg)`; c.appendChild(s); } document.body.appendChild(c); setTimeout(() => c.remove(), 2600); }
 
 /* ---------- 啟動 ---------- */
+let LOADED_AT = 0;
+addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && LOADED_AT && Date.now() - LOADED_AT > 60000) load(); });
 async function load(){
+  LOADED_AT = Date.now();
   const r = await api("petMe", {});
   if (!r || !r.ok) { $("main").innerHTML = `<section class="card"><b>${esc((r && r.error) || "讀取失敗")}</b>${r && r.login ? `<button class="btn" id="lg">用員編登入</button>` : `<button class="btn" id="re">再試一次</button>`}</section>`;
     $("main").onclick = e => { if (e.target.closest("#lg")) ACC && ACC.goLogin && ACC.goLogin(); if (e.target.closest("#re")) load(); }; return; }
